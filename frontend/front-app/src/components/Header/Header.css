@@ -1,14 +1,37 @@
 .App-header {
+  display: flex;
   background-color: #282c34;
   min-height: 1vh;
-  display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 1vmin);
   color: white;
+  padding: 0 1rem;
 }
 
 .App-header p span {
   color: #ff6347;
+}
+
+.App-header button {
+  padding: 0.6rem;
+  position: relative;
+  background-color: #ff6347;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  color: #f0f0f0;
+  border-radius: 0.2rem;
+  transform: translateY(0);
+  transition: transform 0.1s linear;
+  cursor: pointer;
+}
+
+.App-header button:focus {
+  outline: none;
+}
+
+.App-header button:active {
+  outline: none;
+  transform: translateY(2px);
 }
