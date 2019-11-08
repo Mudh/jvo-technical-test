@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { LineChart } from "react-chartkick";
 import "chart.js";
 
-const List = ({ objectives, currentDate }) => {
+const List = ({ objectives, currentDate, incrementCurrent }) => {
   return (
     <ul className="App-list">
-      {objectives.map(item => {
+      {objectives.map((item, index) => {
         const {
           id,
           title,
@@ -14,14 +14,14 @@ const List = ({ objectives, currentDate }) => {
           start,
           current,
           end_date,
-          target
+          target,
+          counter
         } = item;
-        const [currentCount, setCurrent] = useState(current);
-        const [incrementNumber, setNumber] = useState(0);
+        const pad = val => (val < 10 ? `0${val}` : val);
+        const isCounter = counter === undefined ? "00" : pad(counter);
 
-        const increment = () => {
-          setCurrent(currentCount + 1);
-          setNumber(incrementNumber + 1);
+        const increment = index => {
+          incrementCurrent(index);
         };
 
         return (
@@ -37,16 +37,14 @@ const List = ({ objectives, currentDate }) => {
               colors={["#ff6347"]}
               data={{
                 [start_date]: start,
-                [currentDate]: currentCount,
+                [currentDate]: current,
                 [end_date]: target
               }}
             />
             <footer className="App-list-item-footer">
               <span className="App-list-decoration"></span>
-              <button onClick={increment}>Increase current</button>
-              <span className="App-list-counter">
-                Counter: {incrementNumber}
-              </span>
+              <button onClick={() => increment(index)}>Increase current</button>
+              <span className="App-list-counter">Counter: {isCounter}</span>
             </footer>
           </li>
         );
@@ -57,7 +55,8 @@ const List = ({ objectives, currentDate }) => {
 
 List.propTypes = {
   objectives: PropTypes.array.isRequired,
-  currentDate: PropTypes.string.isRequired
+  currentDate: PropTypes.string.isRequired,
+  incrementCurrent: PropTypes.func.isRequired
 };
 
 export default List;
