@@ -1,5 +1,6 @@
 @import "./components/Header/Header.css";
 @import "./components/List/List.css";
+@import "./components/Accordions/Accordions.css";
 
 body {
   margin: 0;
