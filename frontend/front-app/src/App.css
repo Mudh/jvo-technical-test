@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+  background: #e0e0e0 url("./assets/mainBG.png") repeat center center/18px 18px;
+}
+
+.App-main {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
