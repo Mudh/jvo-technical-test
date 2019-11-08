@@ -8,7 +8,8 @@ import App from "../App";
 const mapStateToProps = state => ({
   data: fromObjectives.data(state),
   currentDate: fromObjectives.currentDate(state),
-  currentOvertarget: fromObjectives.currentOvertarget(state)
+  currentOvertarget: fromObjectives.currentOvertarget(state),
+  nestedData: fromObjectives.nestedData(state)
 });
 
 const mapDispatchToProps = dispatch => ({
