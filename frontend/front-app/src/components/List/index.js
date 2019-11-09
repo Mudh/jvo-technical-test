@@ -20,10 +20,6 @@ const List = ({ objectives, currentDate, incrementCurrent }) => {
         const pad = val => (val < 10 ? `0${val}` : val);
         const isCounter = counter === undefined ? "00" : pad(counter);
 
-        const increment = index => {
-          incrementCurrent(index);
-        };
-
         return (
           <li key={id} className="App-list-item">
             <header className="App-list-item-header">
@@ -43,7 +39,9 @@ const List = ({ objectives, currentDate, incrementCurrent }) => {
             />
             <footer className="App-list-item-footer">
               <span className="App-list-decoration"></span>
-              <button onClick={() => increment(index)}>Increase current</button>
+              <button onClick={() => incrementCurrent(index)}>
+                Increase current
+              </button>
               <span className="App-list-counter">Counter: {isCounter}</span>
             </footer>
           </li>

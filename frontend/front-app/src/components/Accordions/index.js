@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { LineChart } from "react-chartkick";
 import Collapsible from "react-collapsible";
 
-const AccordionTree = ({ data, currentDate }) => {
+const AccordionTree = ({ data, currentDate, incrementCurrent }) => {
   const level = 1;
   const haschildren = item => {
     return item.children && item.children.length;
@@ -22,31 +22,51 @@ const AccordionTree = ({ data, currentDate }) => {
   return (
     <div className="App-accordion">
       {data.map((item, i) => {
+        const {
+          id,
+          title,
+          start_date,
+          start,
+          current,
+          end_date,
+          target,
+          counter
+        } = item;
+        const pad = val => (val < 10 ? `0${val}` : val);
+        const isCounter = counter === undefined ? "00" : pad(counter);
         return (
           <Collapsible
             classParentString="App-accordion-item"
-            trigger={
-              <AccordionTreeHeader title={item.title}></AccordionTreeHeader>
-            }
+            trigger={<AccordionTreeHeader title={title}></AccordionTreeHeader>}
             key={level + i}
           >
             <LineChart
               id={`chart_${item.id}`}
-              width="71vw"
+              width="62vw"
               height={180}
               curve={true}
               colors={["#ff6347"]}
               data={{
-                [item.start_date]: item.start,
-                [currentDate]: item.current,
-                [item.end_date]: item.target
+                [start_date]: start,
+                [currentDate]: current,
+                [end_date]: target
               }}
             />
+            <footer className="App-accordion-footer">
+              <span className="App-accordion-decoration"></span>
+              <button onClick={() => incrementCurrent(id - 1)}>
+                Increase current
+              </button>
+              <span className="App-accordion-counter">
+                Counter: {isCounter}
+              </span>
+            </footer>
             {haschildren(item) && (
               <AccordionTree
                 data={item.children}
                 level={level + 1}
                 currentDate={currentDate}
+                incrementCurrent={incrementCurrent}
               />
             )}
           </Collapsible>
@@ -56,9 +76,13 @@ const AccordionTree = ({ data, currentDate }) => {
   );
 };
 
-const Accordion = ({ objectives, currentDate }) => {
+const Accordion = ({ objectives, currentDate, incrementCurrent }) => {
   return (
-    <AccordionTree data={objectives} currentDate={currentDate}></AccordionTree>
+    <AccordionTree
+      data={objectives}
+      currentDate={currentDate}
+      incrementCurrent={incrementCurrent}
+    ></AccordionTree>
   );
 };
 
