@@ -12,24 +12,29 @@ export const nestedData = createSelector(
   data,
   objectives => {
     const getNestedChildren = (arr, parent) => {
-      let out = [];
-      for (let i in arr) {
-        if (arr[i].parent_id === parent) {
-          const children = getNestedChildren(arr, arr[i].id);
+      const nested = [];
+
+      Object.values(arr).forEach(item => {
+        if (item.parent_id === parent) {
+          const children = getNestedChildren(arr, item.id);
+          console.log(children);
 
           if (children.length) {
-            arr[i].children = children;
+            item.children = children;
           }
-          out.push(arr[i]);
+
+          nested.push(item);
         }
-      }
-      return out;
+      });
+
+      return nested;
     };
 
     const nestedObjectives = (arr, parent) => {
-      const mainParent = arr.filter(el => !el.parent_id);
+      const mainParent = arr.find(el => !el.parent_id);
+
       const children = getNestedChildren(arr, parent);
-      return [{ ...mainParent, children: [{ ...children }] }];
+      return [{ ...mainParent, children: [...children] }];
     };
     return nestedObjectives(objectives, 1);
   }
