@@ -1,0 +1,63 @@
+.App-main > .App-accordion {
+  border: none;
+  border-radius: 0.4rem;
+  margin-top: 1rem;
+  box-shadow: 0 10px 25px 0px rgba(55, 55, 55, 0.23);
+  width: 78.6vw;
+}
+
+.App-accordion {
+  background-color: #f0f0f0;
+  padding: 0 2rem;
+}
+
+.App-accordion-item {
+  color: #282c34;
+}
+
+div[id^="chart_"] {
+  margin-bottom: 1.5rem;
+  border-left: 1px dashed #c7c7c7;
+  padding-left: 1rem;
+  margin-left: 0.3rem;
+}
+
+.App-accordion-item__trigger {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 4rem 0 2rem;
+}
+
+.App-main
+  > .App-accordion
+  > .App-accordion-item
+  > .App-accordion-item__trigger {
+  margin: 2rem 0;
+}
+
+.App-accordion-decoration {
+  display: block;
+  flex: 1;
+  border-bottom: 1px dashed #c7c7c7;
+  margin: 0 1.5rem;
+}
+
+.App-accordion-triangle {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 10px solid #5d5d5d;
+}
+
+.is-closed .App-accordion-triangle {
+  transform: rotate(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.is-open .App-accordion-triangle {
+  transform: rotate(90deg);
+  transition: transform 0.2s ease-in-out;
+}
