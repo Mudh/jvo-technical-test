@@ -17,7 +17,6 @@ export const nestedData = createSelector(
       Object.values(arr).forEach(item => {
         if (item.parent_id === parent) {
           const children = getNestedChildren(arr, item.id);
-          console.log(children);
 
           if (children.length) {
             item.children = children;

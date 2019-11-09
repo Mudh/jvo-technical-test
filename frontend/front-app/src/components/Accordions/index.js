@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { LineChart } from "react-chartkick";
 import Collapsible from "react-collapsible";
 
-const AccordionTree = ({ data }) => {
+const AccordionTree = ({ data, currentDate }) => {
   const level = 1;
   const haschildren = item => {
     return item.children && item.children.length;
@@ -38,12 +38,16 @@ const AccordionTree = ({ data }) => {
               colors={["#ff6347"]}
               data={{
                 [item.start_date]: item.start,
-                [item.currentDate]: item.current,
+                [currentDate]: item.current,
                 [item.end_date]: item.target
               }}
             />
             {haschildren(item) && (
-              <AccordionTree data={item.children} level={level + 1} />
+              <AccordionTree
+                data={item.children}
+                level={level + 1}
+                currentDate={currentDate}
+              />
             )}
           </Collapsible>
         );
@@ -52,10 +56,10 @@ const AccordionTree = ({ data }) => {
   );
 };
 
-const Accordion = ({ objectives }) => {
-  console.log("nested data", objectives.map(item => item));
-
-  return <AccordionTree data={objectives}></AccordionTree>;
+const Accordion = ({ objectives, currentDate }) => {
+  return (
+    <AccordionTree data={objectives} currentDate={currentDate}></AccordionTree>
+  );
 };
 
 Accordion.propTypes = {

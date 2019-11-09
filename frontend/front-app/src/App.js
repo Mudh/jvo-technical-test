@@ -29,7 +29,7 @@ const App = ({
           incrementCurrent={incrementCurrent}
         />
         <h1>Tree view</h1>
-        <Accordions objectives={nestedData} />
+        <Accordions currentDate={currentDate} objectives={nestedData} />
       </main>
     </div>
   );
